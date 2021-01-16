@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void solve(){
+    int n,k,x,y;
+    cin>>n>>k>>x>>y;
+
+    if(x==y) {cout<<n<<" "<<n;return;}
+
+    pair<int,int> top,bottom,left,right,ans;
+    int bounce=k%4;
+
+    int temp=abs(x-y);
+    left.first=0;
+    left.second=temp;
+    bottom.first=temp;
+    bottom.second=0;
+    if(x>y) {
+        temp=n-x;
+        temp=temp+y;
+    }
+    else {
+        temp=n-y;
+        temp=temp+x;
+    }
+    right.first=n;
+    right.second=temp;
+    top.first=temp;
+    top.second=n;
+
+    if(x>y){
+        if(bounce==0) cout<<bottom.first<<" "<<bottom.second;
+        else if(bounce==1) cout<<right.first<<" "<<right.second;
+        else if(bounce==2) cout<<top.first<<" "<<top.second;
+        else cout<<left.first<<" "<<left.second;
+    }
+    else{
+        if(bounce==3) cout<<bottom.first<<" "<<bottom.second;
+        else if(bounce==2) cout<<right.first<<" "<<right.second;
+        else if(bounce==1) cout<<top.first<<" "<<top.second;
+        else cout<<left.first<<" "<<left.second;
+    }
+    return;
+
+}
+
+int main() {
+
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    #endif // ONLINE_JUDGE
+    int t;
+    cin>>t;
+    while(t--){
+        solve();
+        cout<<endl;
+    }
+    return 0;
+}

@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int solve(){
+    int n,k,d;
+    cin>>n>>k>>d;
+    vector<int> arr(n);
+    int sum=0;
+
+    for(int i=0;i<n;i++){
+        int temp;
+        cin>>temp;
+        sum+=temp;
+    }
+
+    int ans=sum/k;
+
+    if(ans>=d) return d;
+
+    else return ans;
+}
+
+int main() {
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    #endif // ONLINE_JUDGE
+    int t;
+    cin>>t;
+    while(t--){
+        cout<<solve()<<endl;
+    }
+    return 0;
+}

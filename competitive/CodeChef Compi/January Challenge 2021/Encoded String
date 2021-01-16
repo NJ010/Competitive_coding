@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+vector<char> choice;
+
+char addString(string temp,int start,int end){
+    if(temp.size()==0) return choice[end];
+
+    if(temp[0]=='1') {
+        start=(start+end)/2;
+    }
+    else if(temp[0]=='0'){
+        end=(start+end)/2;
+    }
+    
+    return addString(temp.substr(1),start,end);
+
+}
+
+string solve(){
+    int n;
+    cin>>n;
+
+    string s,ans;
+    cin>>s;
+
+    for(int i=0;i<n;i+=4){
+        ans+=addString(s.substr(i,4),0,15);
+    }
+    return ans;
+}
+
+int main() {
+    choice= { 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p' };
+
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    #endif // ONLINE_JUDGE
+    int t;
+    cin>>t;
+    while(t--){
+        cout<<solve()<<endl;
+    }
+    return 0;
+}

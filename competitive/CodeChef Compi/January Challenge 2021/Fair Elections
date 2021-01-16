@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int solve(){
+    int n,m,sumM=0,sumN=0,ans=0;
+    cin>>n>>m;
+
+    vector<int> arrN(n),arrM(m);
+    for(int i=0;i<n;i++){
+        cin>>arrN[i];
+        sumN+=arrN[i];
+    }
+    for(int i=0;i<m;i++){
+        cin>>arrM[i];
+        sumM+=arrM[i];
+    }
+    sort(arrN.begin(),arrN.end());
+    sort(arrM.begin(),arrM.end());
+    int i=0,j=m-1;
+    while(sumN<=sumM){
+        if(i==n || m==-1) return -1;
+        ans++;
+        sumN-=arrN[i];
+        sumM-=arrM[j];
+        int temp=arrM[j];
+        arrM[j]=arrN[i];
+        arrN[i]=temp;
+        sumN+=arrN[i];
+        sumM+=arrM[j];
+        i++;
+        j--;
+    }
+    return ans;
+}
+
+int main() {
+
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    #endif // ONLINE_JUDGE
+    int t;
+    cin>>t;
+    while(t--){
+        cout<<solve()<<endl;
+    }
+    return 0;
+}

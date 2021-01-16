@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+bool comp(int a,int b){
+    return a>b;
+}
+vector<vector<int>> dp;
+
+int find(int num1,int num2,int i,vector<int> arr,int size){
+    if(num1<0) num1=0;
+    if(num2<0) num2=0;
+    if(dp[num1][num2]!=-1) return dp[num1][num2];
+    if(num1<=0 && num2<=0) return i;
+    else if(i>=size) return INT_MAX;
+
+    if(num1<=0) return dp[num1][num2]= find(num1,num2-arr[i],i+1,arr,size);
+    else if(num2<=0) return dp[num1][num2]=find(num1-arr[i],num2,i+1,arr,size);
+
+    else {
+        int temp1=find(num1-arr[i],num2,i+1,arr,size);
+        int temp2=find(num1,num2-arr[i],i+1,arr,size);
+        dp[num1][num2]=min(temp1,temp2);
+        return min(temp1,temp2);
+    }
+}
+
+int solve(){
+    int n,k,sum=0;
+    cin>>n>>k;
+    vector<int> arr(n);
+    dp=vector<vector<int>>(k+1,vector<int>(k+1,-1));
+    for(int i=0;i<n;i++) cin>>arr[i],sum+=arr[i];
+
+    if(sum<2*k) return -1;
+
+    sort(arr.begin(),arr.end(),comp);
+    int ans=find(k,k,0,arr,n);
+
+
+
+    
+
+    if(ans==INT_MAX) return -1;
+    else return ans;   
+    
+}
+
+int main() {
+
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    #endif // ONLINE_JUDGE
+    int t;
+    cin>>t;
+    while(t--){
+        cout<<solve();
+        cout<<endl;
+    }
+    return 0;
+}
